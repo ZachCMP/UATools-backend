@@ -1,0 +1,139 @@
+scalar DateTime
+
+type Query {
+    info: String!
+    characters: [Character!]!
+    character(id: String!): Character
+}
+
+# type Mutation {}
+
+# type Subscription {}
+
+enum IdentityTypes {
+    normal
+    supernatural
+}
+
+enum AbilityTypes {
+    fitness
+    status
+    knowledge
+    notice
+    connect
+    dodge
+    pursuit
+    lie
+    secrecy
+    struggle
+}
+
+enum IdentityFeatureTypes {
+    castsRituals
+    coercesMeter
+    evaluatesMeter
+    medical
+    firearms
+    providesWoundThreshold
+    providesInitiative
+    resistMeter
+    therapeutic
+    unique
+    gutterMagick
+}
+
+enum MeterTypes {
+    helplessness
+    isolation
+    self
+    unnatural
+    violence
+}
+
+enum RelationshipTypes {
+    favorite
+    guru
+    mentor
+    responsibility
+    protege
+}
+
+type Passions {
+    fear: String
+    rage: String
+    noble: String
+}
+
+type Bio {
+    firstName: String
+    lastName: String
+    middleName: String
+    nickname: String
+    streetName: String
+    name: String!
+    cabal: String
+    objective: String
+    characteristics: String
+    history: String
+    obsession: String!
+    passions: Passions!
+}
+
+type Madness {
+    type: String!
+    origin: String!
+}
+
+type Meter {
+    hardened: Int!
+    failed: Int!
+}
+
+type Meters {
+    helplessness: Meter!
+    Isolation: Meter!
+    self: Meter!
+    unnatural: Meter!
+    violence: Meter!
+}
+
+type IdentityFeature {
+    type: IdentityFeatureTypes!
+    value: String
+}
+
+type Identity {
+    name: String!
+    type: IdentityTypes!
+    percent: Int!
+    description: String
+    ofCourse: String
+    substitutes: AbilityTypes
+    features: [IdentityFeature!]!
+}
+
+type Relationship {
+    type: RelationshipTypes!
+    percent: Int!
+    target: String!
+}
+
+type Wound {
+    origin: String
+    amount: Int
+}
+
+type Wounds {
+    threshold: Int!
+    list: [Wound!]!
+}
+
+type Character {
+    _id: ID!
+    bio: Bio!
+    madness: [Madness!]!
+    meters: Meters!
+    identities: [Identity!]!
+    relationships: [Relationship!]!
+    wounds: Wounds!
+}
